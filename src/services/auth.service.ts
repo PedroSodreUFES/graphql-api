@@ -1,10 +1,30 @@
 import { prismaClient } from "../../prisma/prisma.js";
-import type { RegisterInput } from "../dtos/input/auth.input.js";
+import type { LoginInput, RegisterInput } from "../dtos/input/auth.input.js";
 import type { User } from "../generated/prisma/client.js";
-import { hashPassword } from "../utils/hash.js";
+import { comparePassword, hashPassword } from "../utils/hash.js";
 import { signJwt } from "../utils/jwt.js";
 
 export class AuthService {
+
+    async login(data: LoginInput) {
+        const existingUser = await prismaClient.user.findUnique({
+            where: {
+                email: data.email
+            }
+        })
+
+        if (!existingUser) throw new Error("Credenciais inválidas.")
+
+        const isValidPassword = await comparePassword(
+            data.password,
+            existingUser.password
+        )
+
+        if(!isValidPassword) throw new Error("Credenciais inválidas.")
+
+        return this.generateToken(existingUser)
+    }
+
     async register(data: RegisterInput) {
         const existingUser = await prismaClient.user.findUnique({
             where: {

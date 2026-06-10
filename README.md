@@ -31,4 +31,8 @@ npm run dev
 ```
 
 ## Modelagem
-![Modelagem](public/modelagem.png)
+### Operações de leitura
+![Queries](public/queries.png)
+
+### Operações de escrita
+![Mutações](public/mutations.png)

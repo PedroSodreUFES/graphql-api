@@ -16,7 +16,7 @@ Um usuário autenticado pode:
 5. apagar seu voto em alguma ideia.
 6. fazer comentários nas ideias.
 
-## Tecnologias Utilizadas
+## Tecnologias Utilizadas 
 1. Prisma
 2. GraphQL
 3. Apollo Sever

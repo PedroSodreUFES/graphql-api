@@ -8,12 +8,13 @@ import { AuthResolver } from "./resolvers/auth.resolver.js"
 import { UserResolver } from "./resolvers/user.resolver.js"
 import { buildContext } from './graphql/context/index.js'
 import { IdeaResolver } from './resolvers/idea.resolver.js'
+import { CommentResolver } from './resolvers/comment.resolver.js'
 
 async function bootstrap() {
   const app = express()
 
   const schema = await buildSchema({
-    resolvers: [AuthResolver, UserResolver, IdeaResolver],
+    resolvers: [AuthResolver, UserResolver, IdeaResolver, CommentResolver],
     validate: false,
     emitSchemaFile: './schema.graphql',
   })

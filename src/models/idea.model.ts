@@ -1,5 +1,6 @@
 import { Field, GraphQLISODateTime, ID, ObjectType } from "type-graphql"
 import { UserModel } from "./user.model.js"
+import { CommentModel } from "./comment.model.js"
 
 @ObjectType()
 export class IdeaModel {
@@ -17,6 +18,9 @@ export class IdeaModel {
 
     @Field(() => UserModel, { nullable: true })
     author?: UserModel
+
+    @Field(() => [CommentModel])
+    comments?: CommentModel[]
 
     @Field(() => GraphQLISODateTime)
     createdAt!: Date

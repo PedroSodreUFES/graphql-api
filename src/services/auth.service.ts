@@ -14,6 +14,7 @@ export class AuthService {
         })
 
         if (!existingUser) throw new Error("Credenciais inválidas.")
+        if (!existingUser.password) throw new Error("Credenciais Inválidas.")
 
         const isValidPassword = await comparePassword(
             data.password,

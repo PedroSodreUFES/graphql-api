@@ -32,7 +32,7 @@ export class CommentService {
         })
     }
 
-    async listByIdea(ideaId: string) {
+    async listCommentsByIdea(ideaId: string) {
         return prismaClient.comment.findMany({
             where: {
                 ideaId: ideaId

@@ -13,10 +13,10 @@ export class VoteModel {
     @Field(() => String)
     ideaId!: string
 
-    @Field(() => UserModel)
-    user!: UserModel 
+    @Field(() => UserModel, { nullable: true })
+    user?: UserModel
 
-    @Field(() => IdeaModel)
-    idea!: IdeaModel
+    @Field(() => IdeaModel, { nullable: true })
+    idea?: IdeaModel
 
 }

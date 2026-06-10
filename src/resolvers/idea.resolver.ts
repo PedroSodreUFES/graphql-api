@@ -1,4 +1,4 @@
-import { Arg, FieldResolver, Mutation, Resolver, Root, UseMiddleware } from "type-graphql";
+import { Arg, FieldResolver, Mutation, Query, Resolver, Root, UseMiddleware } from "type-graphql";
 import { CreateIdeaInput, UpdateIdeaInput } from "../dtos/input/idea.input.js";
 import type { User } from "../generated/prisma/client.js";
 import { GqlUser } from "../graphql/decorators/user.decorator.js";
@@ -22,12 +22,24 @@ export class IdeaResolver {
         return this.ideaService.createIdea(data, user.id)
     }
 
+    @Query(() => [IdeaModel])
+    async listIdea(): Promise<IdeaModel[]> {
+        return this.ideaService.listIdea()
+    }
+
     @Mutation(() => IdeaModel)
     async updateIdea(
         @Arg('data', () => UpdateIdeaInput) data: UpdateIdeaInput,
         @Arg('id', () => String)id: string
     ): Promise<IdeaModel> {
         return this.ideaService.updateIdea(id, data)
+    }
+
+    @Mutation(() => Boolean)
+    async deleteIdea(
+        @Arg('id', () => String) id: string
+    ): Promise<boolean> {
+        return this.ideaService.deleteIdea(id)
     }
 
     @FieldResolver(() => UserModel)

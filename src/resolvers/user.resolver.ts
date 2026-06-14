@@ -16,6 +16,12 @@ export class UserResolver {
         return this.userService.findUser(id)
     }
 
+    @Query(() => [UserModel])
+    @UseMiddleware(isAuth)
+    async listUsers(): Promise<UserModel[]> {
+        return this.userService.listUser()
+    }
+
     @Mutation(() => UserModel)
     async createUser(
         @Arg('data', () => CreateUserInput)data: CreateUserInput

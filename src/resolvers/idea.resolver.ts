@@ -20,6 +20,13 @@ export class IdeaResolver {
     private commentService = new CommentService()
     private voteService = new VoteService()
 
+    @Query(() => IdeaModel)
+    async getIdea(
+        @Arg("ideaId", () => String)ideaId: string
+    ): Promise<IdeaModel> {
+        return this.ideaService.findIdeaById(ideaId)
+    }
+
     @Mutation(() => IdeaModel)
     async createIdea(
         @Arg('data', () => CreateIdeaInput) data: CreateIdeaInput,

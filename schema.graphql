@@ -69,8 +69,10 @@ type Mutation {
 }
 
 type Query {
+  getIdea(ideaId: String!): IdeaModel!
   getUser(id: String!): UserModel!
   listIdea: [IdeaModel!]!
+  listUsers: [UserModel!]!
 }
 
 input RegisterInput {

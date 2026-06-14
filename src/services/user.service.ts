@@ -30,4 +30,8 @@ export class UserService {
             }
         })
     }
+
+    async listUser() {
+        return prismaClient.user.findMany()
+    }
 }
